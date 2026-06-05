@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<section class="hero-copy" aria-label="Intro">
+    <div class="hero-stack">
+        <h1 class="hero-title" aria-label="Shape your digital world">
+            <span class="hero-word" style="--word-delay: 0s;">SHAPE YOUR</span>
+            <br>
+            <span class="hero-word" style="--word-delay: 0.34s;">DIGITAL WORLD</span>
+        </h1>
+        <div class="hero-actions">
+            <a class="hero-button" href="/portfolio/" style="--button-delay: 0.78s;">EXPLORE OUR WORK</a>
+            <a class="hero-button" href="/contact/" style="--button-delay: 0.94s;">GET IN TOUCH</a>
+        </div>
+    </div>
+</section>
+<section class="services-section reveal-section" aria-labelledby="services-title">
+    <div class="services-shell">
+        <div class="services-lead">
+            <div class="services-intro reveal-item reveal-slide-left">
+                <h2 class="services-title" id="services-title">
+                    Your Vision<br>
+                    Our Mission
+                </h2>
+                <p class="services-copy">
+                    Clean websites. Practical tools. Smarter workflows.
+                </p>
+                <div class="services-action">
+                    <a class="project-primary-link services-find-link" href="/services/">Explore Our Services</a>
+                </div>
+            </div>
+            <div class="services-flag-panel reveal-item reveal-slide-left" aria-hidden="true">
+                <img
+                    class="services-mission-flag"
+                    src="{% static 'images/mission-flag.png' %}"
+                    alt=""
+                >
+            </div>
+        </div>
+        <div class="services-list">
+            <article class="service-row reveal-item reveal-slide-left">
+                <div class="service-row-mark">
+                    <span class="service-number">01</span>
+                    <img class="service-row-icon" src="{% static 'images/website-code-icon.png' %}" alt="" aria-hidden="true">
+                </div>
+                <div class="service-row-main">
+                    <h3>Web Design</h3>
+                    <p>Custom websites built from the ground up for clarity, speed, and trust.</p>
+                </div>
+                <div class="service-row-actions">
+                    <ul class="service-feature-labels" aria-label="Web design features">
+                        <li>Custom interfaces</li>
+                        <li>Responsive builds</li>
+                        <li>Launch setup</li>
+                    </ul>
+                    <a class="service-row-link" href="/services/#website-development">Explore Web Design Services</a>
+                </div>
+            </article>
+            <article class="service-row reveal-item reveal-slide-left">
+                <div class="service-row-mark">
+                    <span class="service-number">02</span>
+                    <img class="service-row-icon" src="{% static 'images/automation-icon.png' %}" alt="" aria-hidden="true">
+                </div>
+                <div class="service-row-main">
+                    <h3>Automation Tools</h3>
+                    <p>Practical internal systems that reduce repetitive work and keep operations moving.</p>
+                </div>
+                <div class="service-row-actions">
+                    <ul class="service-feature-labels" aria-label="Automation features">
+                        <li>CRMs</li>
+                        <li>Dashboards</li>
+                        <li>Workflow tools</li>
+                    </ul>
+                    <a class="service-row-link" href="/services/#automation-solutions">Explore Automation Tools</a>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+<section class="why-section reveal-section" aria-labelledby="why-title">
+    <div class="why-shell">
+        <div class="why-intro reveal-item reveal-slide-left">
+            <h2 class="why-title" id="why-title">Why Duoro?</h2>
+            <p class="why-copy">
+                A practical development partner for businesses that need more than a nice-looking website.
+            </p>
+            <p class="why-note">Built for clarity. Designed for workflow. Delivered with care.</p>
+        </div>
+        <div class="why-list reveal-item reveal-slide-right">
+            <article class="why-point">
+                <img class="why-icon" src="{% static 'images/canadian-leaf.png' %}" alt="" aria-hidden="true">
+                <div class="why-point-copy">
+                    <h3>Built Close To Home</h3>
+                    <p>Based in Ottawa, Duoro works closely with local businesses through clear communication, practical thinking, and personal service.</p>
+                </div>
+            </article>
+            <article class="why-point">
+                <img class="why-icon" src="{% static 'images/puzzle-piece.png' %}" alt="" aria-hidden="true">
+                <div class="why-point-copy">
+                    <h3>Shaped Around You</h3>
+                    <p>Your website or automation tool is designed around your goals, workflow, and the way your business actually operates.</p>
+                </div>
+            </article>
+            <article class="why-point">
+                <img class="why-icon" src="{% static 'images/magnifying-glass-icon.png' %}" alt="" aria-hidden="true">
+                <div class="why-point-copy">
+                    <h3>No Detail Overlooked</h3>
+                    <p>We work with you through every decision, refining the structure, design, and functionality until the final system feels complete.</p>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+<section class="testimonials-section reveal-section" aria-labelledby="testimonials-title">
+    <div class="testimonials-shell">
+        <div class="testimonials-intro reveal-item reveal-slide-left">
+            <p class="mission-eyebrow">TESTIMONIALS</p>
+            <h2 class="testimonials-title" id="testimonials-title">What clients are saying</h2>
+        </div>
+        <div class="testimonials-carousel reveal-item reveal-slide-right" data-testimonial-carousel>
+            <div class="testimonial-frame">
+                <img class="testimonial-quote-icon" src="{% static 'images/quotes.png' %}" alt="" aria-hidden="true">
+                <p class="testimonial-meta">PROJECT FEEDBACK</p>
+                <div class="testimonials-viewport">
+                    <div class="testimonials-track">
+                        <article class="testimonial-card">
+                            <p>Duoro helped us create a cleaner, more professional online presence. The process was clear, responsive, and easy from start to finish.</p>
+                            <div>
+                                <h3>Family First Insurance</h3>
+                            </div>
+                        </article>
+                        <article class="testimonial-card">
+                            <p>The final website felt polished and practical. We appreciated how quickly our feedback was understood and turned into the right solution.</p>
+                            <div>
+                                <h3>K&amp;A Solutions</h3>
+                            </div>
+                        </article>
+                        <article class="testimonial-card">
+                            <p>Our club needed something simple, organized, and welcoming. Duoro delivered a site that makes our work much easier to share.</p>
+                            <div>
+                                <h3>Inner Wheel Club Of Ottawa</h3>
+                            </div>
+                        </article>
+                        <article class="testimonial-card">
+                            <p>Duoro gave our business a sharper look online and made the whole experience straightforward. The attention to detail really stood out.</p>
+                            <div>
+                                <h3>MMG Contracting</h3>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonials-controls" aria-label="Testimonial controls">
+                <button class="testimonial-control testimonial-control-prev" type="button" data-testimonial-prev aria-label="Previous testimonial">
+                    <span aria-hidden="true"></span>
+                </button>
+                <div class="testimonial-dots" aria-label="Choose testimonial"></div>
+                <button class="testimonial-control testimonial-control-next" type="button" data-testimonial-next aria-label="Next testimonial">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="contact-section reveal-section" aria-labelledby="contact-title">
+    <div class="contact-shell">
+        <div class="contact-intro reveal-item reveal-slide-left">
+            <p class="mission-eyebrow">Contact</p>
+            <h2 class="contact-title" id="contact-title">Let&apos;s start the conversation.</h2>
+            <p class="contact-copy">
+                Tell us a little about your brand, your goals, and what you&apos;re building. We&apos;ll shape the right next step from there.
+            </p>
+        </div>
+        <form class="contact-form reveal-item reveal-slide-right" action="#" method="post">
+            <div class="contact-grid">
+                <label class="contact-field">
+                    <span>Name</span>
+                    <input type="text" name="name" placeholder="Your name">
+                </label>
+                <label class="contact-field">
+                    <span>Email</span>
+                    <input type="email" name="email" placeholder="you@example.com">
+                </label>
+                <label class="contact-field contact-field-wide">
+                    <span>Company</span>
+                    <input type="text" name="company" placeholder="Your company or brand">
+                </label>
+                <label class="contact-field contact-field-wide">
+                    <span>Project Details</span>
+                    <textarea name="details" rows="6" placeholder="Tell us about your project, goals, or timeline."></textarea>
+                </label>
+            </div>
+            <button class="contact-button" type="submit">SEND INQUIRY</button>
+        </form>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'js/testimonials-carousel.js' %}"></script>
+{% endblock %}

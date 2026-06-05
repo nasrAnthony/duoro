@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Services{% endblock %}
+
+{% block content %}
+<section class="services-studio-hero reveal-section" aria-labelledby="services-page-title">
+    <div class="services-studio-hero-shell reveal-item reveal-sweep">
+        <p class="mission-eyebrow">Services</p>
+        <h1 class="services-studio-title" id="services-page-title">What We Do</h1>
+    </div>
+</section>
+
+<section class="services-statement-section reveal-section" aria-labelledby="services-positioning-title">
+    <div class="services-statement-shell">
+        <div class="services-focus-list reveal-item reveal-rise" aria-label="Primary services">
+            <a href="#website-development">Website Development</a>
+            <a href="#automation-solutions">Automation Solutions</a>
+        </div>
+    </div>
+</section>
+
+<section class="service-chapter-section reveal-section" id="website-development" aria-labelledby="website-development-title">
+    <div class="service-chapter-shell">
+        <div class="service-chapter-heading reveal-item reveal-slide-left">
+            <span class="service-chapter-number">01</span>
+            <h2 id="website-development-title">Website Development</h2>
+        </div>
+        <div class="service-chapter-content reveal-item reveal-slide-right">
+            <div class="service-capability-panel" aria-label="Website development capabilities">
+                <div class="service-capability-panel-intro">
+                    <p class="mission-eyebrow">Overview</p>
+                    <span>Websites built for real business use.</span>
+                    <p>
+                        We design, develop, and deploy clean responsive websites from the ground up, with the structure a business needs to look professional and operate clearly online.
+                    </p>
+                </div>
+                <div class="service-subsection">
+                    <div class="service-feature-grid">
+                        <article class="service-feature service-feature-icon-card reveal-item reveal-service-card">
+                            <h4>Custom Design</h4>
+                            <img class="service-feature-icon" src="{% static 'images/icons/custom-website-icon.png' %}" alt="" aria-hidden="true">
+                        </article>
+                        <article class="service-feature service-feature-icon-card reveal-item reveal-service-card">
+                            <h4>Responsive Development</h4>
+                            <img class="service-feature-icon" src="{% static 'images/icons/responsive-icon.png' %}" alt="" aria-hidden="true">
+                        </article>
+                        <article class="service-feature service-feature-icon-card reveal-item reveal-service-card">
+                            <h4>Contact Forms</h4>
+                            <img class="service-feature-icon" src="{% static 'images/icons/contact-design-icon.png' %}" alt="" aria-hidden="true">
+                        </article>
+                        <article class="service-feature service-feature-icon-card reveal-item reveal-service-card">
+                            <h4>Client Portals</h4>
+                            <img class="service-feature-icon" src="{% static 'images/icons/client-portal-icon.png' %}" alt="" aria-hidden="true">
+                        </article>
+                        <article class="service-feature service-feature-icon-card reveal-item reveal-service-card">
+                            <h4>SEO Foundations</h4>
+                            <img class="service-feature-icon" src="{% static 'images/icons/seo-icon.png' %}" alt="" aria-hidden="true">
+                        </article>
+                        <article class="service-feature service-feature-icon-card reveal-item reveal-service-card">
+                            <h4>Deployment &amp; Hosting Setup</h4>
+                            <img class="service-feature-icon" src="{% static 'images/icons/deployment-hosting-icon.png' %}" alt="" aria-hidden="true">
+                        </article>
+                    </div>
+                </div>
+                <div class="service-action-row">
+                    <a class="project-primary-link service-action-link" href="/portfolio/">Portfolio</a>
+                    <a class="project-primary-link service-action-link" href="/contact/">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="service-chapter-section reveal-section" id="automation-solutions" aria-labelledby="automation-solutions-title">
+    <div class="service-chapter-shell service-chapter-shell-reverse">
+        <div class="service-chapter-heading reveal-item reveal-slide-right">
+            <span class="service-chapter-number">02</span>
+            <h2 id="automation-solutions-title">Automation Solutions</h2>
+        </div>
+        <div class="service-chapter-content reveal-item reveal-slide-left">
+            <div class="service-capability-panel" aria-label="Business automation capabilities">
+                <div class="service-capability-panel-intro">
+                    <p class="mission-eyebrow">Overview</p>
+                    <span>Business tools in the palm of your hands.</span>
+                    <p>
+                        We streamline repetitive tasks so businesses save time, reduce operating costs, and keep important workflows easier to manage from one clear system.
+                    </p>
+                </div>
+                <div class="service-subsection">
+                    <div class="service-feature-grid">
+                        <article class="service-feature reveal-item reveal-service-card">
+                            <h4>Automated Email Workflows</h4>
+                            <p>Send the right messages automatically after forms, bookings, or customer actions.</p>
+                        </article>
+                        <article class="service-feature reveal-item reveal-service-card">
+                            <h4>Lead Management Systems</h4>
+                            <p>Track new inquiries, follow-ups, and customer progress in one place.</p>
+                        </article>
+                        <article class="service-feature reveal-item reveal-service-card">
+                            <h4>Custom CRM Development</h4>
+                            <p>A tailored system for managing clients, jobs, quotes, invoices, or internal records.</p>
+                        </article>
+                        <article class="service-feature reveal-item reveal-service-card">
+                            <h4>Internal Dashboards</h4>
+                            <p>Simple dashboards for viewing important business activity and performance.</p>
+                        </article>
+                        <article class="service-feature reveal-item reveal-service-card">
+                            <h4>Data Processing Tools</h4>
+                            <p>Tools that clean, organize, and transform repetitive data tasks.</p>
+                        </article>
+                        <article class="service-feature reveal-item reveal-service-card">
+                            <h4>API Integrations</h4>
+                            <p>Connect your website, forms, databases, and third-party platforms together.</p>
+                        </article>
+                    </div>
+                </div>
+                <a class="project-primary-link service-action-link" href="/contact/">Contact Us</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="services-final-cta reveal-section" aria-labelledby="services-cta-title">
+    <div class="services-final-cta-shell reveal-item reveal-card">
+        <p class="mission-eyebrow">Start the Conversation</p>
+        <h2 class="services-final-cta-title" id="services-cta-title">Have a project in mind?</h2>
+        <p class="services-final-cta-copy">
+            Whether you need a new website or a custom tool to simplify your workflow, we can help turn the idea into a working system.
+        </p>
+        <a class="hero-button about-cta-button" href="/contact/">CONTACT US TODAY</a>
+    </div>
+</section>
+{% endblock %}

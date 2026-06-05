@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Duoro{% endblock %}</title>
+    <script>
+        (function () {
+            var navigation = performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
+            var isReload = navigation ? navigation.type === "reload" : performance.navigation && performance.navigation.type === 1;
+            var hasLoaded = false;
+
+            try {
+                hasLoaded = sessionStorage.getItem("duoro-loader-seen") === "true";
+            } catch (error) {
+                hasLoaded = false;
+            }
+
+            if (hasLoaded && !isReload) {
+                document.documentElement.classList.add("site-loader-skip");
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="site-loader" data-site-loader aria-hidden="true">
+        <div class="site-loader-brand">
+            <div class="site-loader-logo"></div>
+            <div class="site-loader-word">UORO</div>
+        </div>
+    </div>
+    <div
+        id="site-background"
+        class="site-background"
+        aria-hidden="true"
+    >
+        <div class="site-background-layer site-background-layer-back"></div>
+        <div class="site-background-stars"></div>
+        <div class="site-background-haze"></div>
+        <div class="site-background-layer site-background-layer-front"></div>
+        <div class="site-background-observatory-glow"></div>
+    </div>
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Primary">
+            <a class="site-brand" href="/">DUORO</a>
+            <button
+                class="site-nav-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="site-nav-links"
+                aria-label="Open navigation menu"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="site-nav-links" id="site-nav-links">
+                <a href="/">HOME</a>
+                <a href="/about/">ABOUT</a>
+                <a href="/services/">SERVICES</a>
+                <a href="/portfolio/">PORTFOLIO</a>
+                <a href="/contact/">CONTACT US</a>
+            </div>
+        </nav>
+    </header>
+    <div class="site-nav-scrim" aria-hidden="true"></div>
+    <main class="page-content">
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="site-footer reveal-section">
+        <div class="site-footer-shell">
+            <div class="site-footer-brand-block reveal-item reveal-slide-left">
+                <a class="site-footer-brand" href="/">DUORO</a>
+                <p class="site-footer-copy">Thoughtful digital presence, shaped with clarity and intention.</p>
+            </div>
+            <nav class="site-footer-nav reveal-item reveal-slide-right" aria-label="Footer">
+                <a href="/">Home</a>
+                <a href="/about/">About</a>
+                <a href="/services/">Services</a>
+                <a href="/portfolio/">Portfolio</a>
+                <a href="/contact/">Contact</a>
+            </nav>
+        </div>
+    </footer>
+    <script src="{% static 'js/section-reveal.js' %}"></script>
+    <script src="{% static 'js/site-nav.js' %}"></script>
+    <script src="{% static 'js/site-background.js' %}"></script>
+    <script src="{% static 'js/site-loader.js' %}"></script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

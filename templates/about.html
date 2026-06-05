@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+<section class="about-hero reveal-section" aria-labelledby="about-title">
+    <div class="about-hero-shell project-page-hero-shell reveal-item reveal-sweep">
+        <p class="mission-eyebrow">About</p>
+        <h1 class="project-page-title" id="about-title">My Story</h1>
+    </div>
+</section>
+
+<section class="founder-section reveal-section" aria-labelledby="founder-title">
+    <div class="founder-shell">
+        <div class="founder-media reveal-item reveal-slide-left">
+            <img src="{% static 'images/duoro-founder.jpg' %}" alt="Founder portrait" class="founder-image">
+        </div>
+        <div class="founder-copy-block reveal-item reveal-slide-right">
+            <h2 class="about-section-title" id="founder-title">Who's behind Duoro?</h2>
+            <p class="founder-copy">
+                Hello! My name is Anthony Nasr. I'm a student pursuing my Master of Engineering in Electrical and Computer Engineering at the University of Ottawa, with a concentration in Applied AI/ML.
+            </p>
+            <p class="founder-copy">
+                Duoro is where I bring together design, technology, and strategy to help businesses build a stronger digital presence. Every project is handled with intention, from the first idea to the final details, because I believe a website should do more than exist online. It should shape how people see your brand.
+            </p>
+            <p class="founder-copy">
+                With a background in engineering, software, and artificial intelligence, I approach web design with both creativity and structure. Duoro is not a traditional agency. It is my full creative and technical practice, built around helping businesses look sharper, feel more professional, and move with more confidence online.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="about-story reveal-section" aria-labelledby="about-story-title">
+    <div class="about-story-shell">
+        <div class="about-story-intro reveal-item reveal-slide-left">
+            <p class="mission-eyebrow">How it all began</p>
+            <h2 class="about-section-title" id="about-story-title">Built from curiosity, shaped by experience.</h2>
+        </div>
+        <div class="about-story-copy reveal-item reveal-slide-right">
+            <p>
+                What began as curiosity became a passion through real projects, hands-on problem solving, and years of building experience across design, development, and digital strategy.
+            <p>
+               Today, Duoro is my creative and technical practice. It brings together everything I enjoy: clean design, thoughtful execution, and helping businesses create a digital presence they can be proud of.
+            <p>
+            </div>
+    </div>
+</section>
+<section class="about-cta reveal-section" aria-labelledby="about-cta-title">
+    <div class="about-cta-shell reveal-item reveal-card">
+        <p class="mission-eyebrow">REACH OUT TODAY</p>
+        <h2 class="about-cta-title" id="about-cta-title">Ready to take the next step?</h2>
+        <a class="hero-button about-cta-button" href="/contact/">CONTACT US</a>
+    </div>
+</section>
+{% endblock %}

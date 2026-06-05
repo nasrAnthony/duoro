@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ project.title }}{% endblock %}
+
+{% block content %}
+<section class="simple-page-hero reveal-section" aria-labelledby="project-title">
+    <div class="simple-page-hero-shell project-page-hero-shell reveal-item reveal-sweep">
+        <h1 class="project-page-title" id="project-title">{{ project.title }}</h1>
+    </div>
+</section>
+
+{% if project.combined_image %}
+<section class="project-combined reveal-section" aria-label="{{ project.title }} device previews">
+    <div class="project-combined-shell reveal-item reveal-rise">
+        <img
+            class="project-combined-image"
+            src="{% static project.combined_image %}"
+            alt="{{ project.combined_image_alt }}"
+        >
+    </div>
+</section>
+{% endif %}
+
+<section class="project-gallery reveal-section" aria-label="{{ project.title }} gallery">
+    <div class="project-preview-heading reveal-item reveal-rise">
+        <h2 class="about-section-title project-preview-title">Preview</h2>
+    </div>
+    <div class="project-scroll-showcase reveal-item reveal-card">
+        <div class="project-scroll-frame">
+            <img
+                class="project-scroll-image"
+                src="{% static project.detail_image %}"
+                alt="{{ project.detail_image_alt }}"
+            >
+        </div>
+    </div>
+</section>
+
+{% if project.detail_note_title or project.detail_features %}
+<section class="project-note reveal-section" aria-labelledby="project-note-title">
+    <div class="project-note-shell reveal-item reveal-rise">
+        <p class="mission-eyebrow">Beyond the Website</p>
+        <h2 class="about-section-title project-note-title" id="project-note-title">{{ project.detail_note_title }}</h2>
+        {% if project.detail_features %}
+        <div class="project-feature-grid" aria-label="Project features">
+            {% for feature in project.detail_features %}
+            <div class="project-feature-item">
+                <span class="project-feature-check" aria-hidden="true">&#10003;</span>
+                <span>{{ feature }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endif %}
+
+<section class="project-detail reveal-section" aria-labelledby="project-overview-title">
+    <div class="project-detail-summary reveal-item reveal-card">
+        <h2 class="about-section-title project-detail-title" id="project-overview-title">See it live.</h2>
+        <div class="project-detail-actions project-detail-actions-stacked">
+            {% if project.live_url %}
+            <a class="project-primary-link" href="{{ project.live_url }}" target="_blank" rel="noreferrer">Visit Live Site</a>
+            {% else %}
+            <span class="project-primary-link project-primary-link-disabled">Launching Soon</span>
+            {% endif %}
+            <a class="project-primary-link project-secondary-link" href="/contact/">Contact Us</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

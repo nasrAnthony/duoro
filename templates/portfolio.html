@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Portfolio{% endblock %}
+
+{% block content %}
+<section class="simple-page-hero reveal-section" aria-labelledby="portfolio-page-title">
+    <div class="simple-page-hero-shell project-page-hero-shell reveal-item reveal-sweep">
+        <p class="mission-eyebrow">Portfolio</p>
+        <h1 class="project-page-title" id="portfolio-page-title">Explore</h1>
+    </div>
+</section>
+
+<section class="portfolio-showcase reveal-section">
+    <div class="portfolio-showcase-shell">
+        <div class="portfolio-grid">
+            {% for project in projects %}
+            <a class="portfolio-card-link" href="{% url 'portfolio-detail' project.slug %}">
+                <article class="portfolio-card reveal-item reveal-card">
+                    <div class="portfolio-card-media reveal-item reveal-sweep"{% if not project.image %} aria-hidden="true"{% endif %}>
+                        {% if project.image %}
+                        <img class="portfolio-card-image" src="{% static project.image %}" alt="{{ project.image_alt }}">
+                        {% else %}
+                        <div class="portfolio-card-screen">
+                            <span class="portfolio-card-monogram">{{ project.monogram }}</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="portfolio-card-copy reveal-item reveal-rise">
+                        <h3 class="portfolio-card-title">{{ project.title }}</h3>
+                        <span class="portfolio-link">View Project</span>
+                    </div>
+                </article>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

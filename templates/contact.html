@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<section class="contact-section contact-section-first reveal-section" aria-labelledby="contact-page-title">
+    <div class="contact-shell contact-shell-centered">
+        <div class="contact-intro reveal-item reveal-slide-left">
+            <p class="mission-eyebrow">Let's talk</p>
+            <h1 class="contact-page-title contact-title" id="contact-page-title">Contact Us</h1>
+            <p class="contact-page-lead contact-copy">
+               Have a project in mind? Reach out today for a free consultation.
+            </p>
+            <ul class="contact-methods" aria-label="Other ways to reach us">
+                <li>
+                    <img src="{% static 'images/email-icon.png' %}" alt="" aria-hidden="true">
+                    <span><a href="mailto:info@duoro.ca">info@duoro.ca</a>.</span>
+                </li>
+                <li>
+                    <img src="{% static 'images/insta-icon.png' %}" alt="" aria-hidden="true">
+                    <span><a href="https://www.instagram.com/DuoroDigital/">DuoroDigital</a>.</span>
+                </li>
+            </ul>
+        </div>
+        <form class="contact-form reveal-item reveal-slide-right" action="#" method="post">
+            <div class="contact-grid">
+                <label class="contact-field">
+                    <span>Name</span>
+                    <input type="text" name="name" placeholder="Your name">
+                </label>
+                <label class="contact-field">
+                    <span>Email</span>
+                    <input type="email" name="email" placeholder="you@example.com">
+                </label>
+                <label class="contact-field contact-field-wide">
+                    <span>Company</span>
+                    <input type="text" name="company" placeholder="Your company or brand">
+                </label>
+                <label class="contact-field contact-field-wide">
+                    <span>Project Details</span>
+                    <textarea name="details" rows="6" placeholder="Tell us about your project, goals, or timeline."></textarea>
+                </label>
+            </div>
+            <button class="contact-button" type="submit">SEND INQUIRY</button>
+        </form>
+    </div>
+</section>
+{% endblock %}
