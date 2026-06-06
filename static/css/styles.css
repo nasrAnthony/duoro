@@ -95,17 +95,20 @@ body.site-menu-open {
 
 .site-loader-brand {
     position: relative;
-    width: clamp(16rem, 30vw, 26rem);
+    width: clamp(17rem, 36vw, 30rem);
     height: clamp(5rem, 11vw, 9rem);
-    --site-loader-logo-shift: clamp(0rem, 5.1vw, 4.5rem);
-    --site-loader-word-width: clamp(9rem, 18.8vw, 15.5rem);
+    --site-loader-logo-size: clamp(5rem, 11vw, 9rem);
+    --site-loader-word-width: clamp(10.75rem, 22.5vw, 18.5rem);
+    --site-loader-word-gap: clamp(-0.9rem, -0.8vw, -0.45rem);
+    --site-loader-logo-shift: calc((var(--site-loader-word-width) + var(--site-loader-word-gap)) / 2);
+    --site-loader-word-offset: calc((var(--site-loader-logo-size) + var(--site-loader-word-gap) - var(--site-loader-word-width)) / 2);
 }
 
 .site-loader-logo {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: clamp(5rem, 11vw, 9rem);
+    width: var(--site-loader-logo-size);
     aspect-ratio: 1;
     background: #ffffff;
     -webkit-mask-image: url("../images/main-logo.svg");
@@ -133,7 +136,7 @@ body.site-menu-open {
     font-weight: 700;
     line-height: 1;
     letter-spacing: 0.12em;
-    transform: translate3d(0, -50%, 0);
+    transform: translate3d(var(--site-loader-word-offset), -50%, 0);
     animation: site-loader-word-reveal 2.05s cubic-bezier(0.2, 1, 0.3, 1) forwards;
     white-space: nowrap;
 }
@@ -681,6 +684,32 @@ body.site-menu-open {
     border-color: rgba(245, 249, 255, 0.96);
     color: #000000;
     transform: translateY(-1px);
+}
+
+.page-hero-copy {
+    background: transparent;
+}
+
+.page-hero-stack {
+    grid-template-columns: minmax(0, 38rem);
+}
+
+.page-hero-eyebrow {
+    margin: 0;
+    color: rgba(245, 249, 255, 0.84);
+    text-shadow: 0 10px 35px rgba(5, 10, 20, 0.38);
+}
+
+.page-hero-title {
+    max-width: 16ch;
+}
+
+.page-hero-word-wrap {
+    white-space: normal;
+}
+
+.page-hero-actions {
+    width: min(22rem, 100%);
 }
 
 .about-hero {
@@ -2632,9 +2661,36 @@ body.site-menu-open {
 }
 
 @media (max-width: 760px) {
+    :root {
+        --parallax-frame-height: 100svh;
+        --parallax-foreground-offset: 58svh;
+    }
+
     .site-header {
         justify-content: stretch;
         padding-top: 0.25rem;
+    }
+
+    .site-background-layer-back {
+        background-size: auto 100%;
+        background-position: 26% top;
+    }
+
+    .site-background-layer-front {
+        background-size: auto 52%;
+        background-position: 64% var(--parallax-foreground-offset);
+    }
+
+    .site-background-haze {
+        top: calc(var(--parallax-foreground-offset) - 1.4rem);
+        height: clamp(7rem, 28vw, 11rem);
+    }
+
+    .site-background-observatory-glow {
+        top: calc(var(--parallax-foreground-offset) + clamp(0.65rem, 3vw, 1.4rem));
+        left: 84%;
+        width: clamp(4.6rem, 22vw, 6.2rem);
+        height: clamp(3rem, 14vw, 4rem);
     }
 
     .site-nav {
@@ -2708,6 +2764,10 @@ body.site-menu-open {
         justify-self: start;
         width: min(18rem, 100%);
         padding-bottom: 0;
+    }
+
+    .page-hero-actions {
+        width: min(22rem, 100%);
     }
 
     .mission-section {

@@ -4,14 +4,20 @@
 {% block title %}Portfolio{% endblock %}
 
 {% block content %}
-<section class="simple-page-hero reveal-section" aria-labelledby="portfolio-page-title">
-    <div class="simple-page-hero-shell project-page-hero-shell reveal-item reveal-sweep">
-        <p class="mission-eyebrow">Portfolio</p>
-        <h1 class="project-page-title" id="portfolio-page-title">Explore</h1>
+<section class="hero-copy page-hero-copy" aria-labelledby="portfolio-page-title">
+    <div class="hero-stack page-hero-stack">
+        <p class="mission-eyebrow page-hero-eyebrow hero-word" style="--word-delay: 0s;">PORTFOLIO</p>
+        <h1 class="hero-title page-hero-title" id="portfolio-page-title">
+            <span class="hero-word page-hero-word-wrap" style="--word-delay: 0.22s;">EXPLORE</span>
+        </h1>
+        <div class="hero-actions page-hero-actions">
+            <a class="hero-button" href="#portfolio-showcase" style="--button-delay: 0.68s;">VIEW PROJECTS</a>
+            <a class="hero-button" href="/contact/" style="--button-delay: 0.84s;">START A PROJECT</a>
+        </div>
     </div>
 </section>
 
-<section class="portfolio-showcase reveal-section">
+<section class="portfolio-showcase reveal-section" id="portfolio-showcase">
     <div class="portfolio-showcase-shell">
         <div class="portfolio-grid">
             {% for project in projects %}

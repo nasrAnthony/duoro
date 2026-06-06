@@ -4,10 +4,16 @@
 {% block title %}About{% endblock %}
 
 {% block content %}
-<section class="about-hero reveal-section" aria-labelledby="about-title">
-    <div class="about-hero-shell project-page-hero-shell reveal-item reveal-sweep">
-        <p class="mission-eyebrow">About</p>
-        <h1 class="project-page-title" id="about-title">My Story</h1>
+<section class="hero-copy page-hero-copy" aria-labelledby="about-title">
+    <div class="hero-stack page-hero-stack">
+        <p class="mission-eyebrow page-hero-eyebrow hero-word" style="--word-delay: 0s;">ABOUT</p>
+        <h1 class="hero-title page-hero-title" id="about-title">
+            <span class="hero-word page-hero-word-wrap" style="--word-delay: 0.22s;">MY STORY</span>
+        </h1>
+        <div class="hero-actions page-hero-actions">
+            <a class="hero-button" href="#founder-title" style="--button-delay: 0.68s;">MEET THE FOUNDER</a>
+            <a class="hero-button" href="/contact/" style="--button-delay: 0.84s;">CONTACT US</a>
+        </div>
     </div>
 </section>
 

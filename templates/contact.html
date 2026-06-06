@@ -4,11 +4,24 @@
 {% block title %}Contact{% endblock %}
 
 {% block content %}
-<section class="contact-section contact-section-first reveal-section" aria-labelledby="contact-page-title">
+<section class="hero-copy page-hero-copy" aria-labelledby="contact-page-title">
+    <div class="hero-stack page-hero-stack">
+        <p class="mission-eyebrow page-hero-eyebrow hero-word" style="--word-delay: 0s;">LET'S TALK</p>
+        <h1 class="hero-title page-hero-title" id="contact-page-title">
+            <span class="hero-word page-hero-word-wrap" style="--word-delay: 0.22s;">CONTACT US</span>
+        </h1>
+        <div class="hero-actions page-hero-actions">
+            <a class="hero-button" href="#contact-form" style="--button-delay: 0.68s;">START A PROJECT</a>
+            <a class="hero-button" href="mailto:info@duoro.ca" style="--button-delay: 0.84s;">EMAIL US</a>
+        </div>
+    </div>
+</section>
+
+<section class="contact-section contact-section-first reveal-section" aria-labelledby="contact-form-title">
     <div class="contact-shell contact-shell-centered">
         <div class="contact-intro reveal-item reveal-slide-left">
             <p class="mission-eyebrow">Let's talk</p>
-            <h1 class="contact-page-title contact-title" id="contact-page-title">Contact Us</h1>
+            <h2 class="contact-page-title contact-title" id="contact-form-title">Contact Us</h2>
             <p class="contact-page-lead contact-copy">
                Have a project in mind? Reach out today for a free consultation.
             </p>
@@ -23,7 +36,7 @@
                 </li>
             </ul>
         </div>
-        <form class="contact-form reveal-item reveal-slide-right" action="#" method="post">
+        <form class="contact-form reveal-item reveal-slide-right" id="contact-form" action="#" method="post">
             <div class="contact-grid">
                 <label class="contact-field">
                     <span>Name</span>

@@ -4,9 +4,20 @@
 {% block title %}{{ project.title }}{% endblock %}
 
 {% block content %}
-<section class="simple-page-hero reveal-section" aria-labelledby="project-title">
-    <div class="simple-page-hero-shell project-page-hero-shell reveal-item reveal-sweep">
-        <h1 class="project-page-title" id="project-title">{{ project.title }}</h1>
+<section class="hero-copy page-hero-copy" aria-labelledby="project-title">
+    <div class="hero-stack page-hero-stack">
+        <p class="mission-eyebrow page-hero-eyebrow hero-word" style="--word-delay: 0s;">PORTFOLIO</p>
+        <h1 class="hero-title page-hero-title" id="project-title">
+            <span class="hero-word page-hero-word-wrap" style="--word-delay: 0.22s;">{{ project.title }}</span>
+        </h1>
+        <div class="hero-actions page-hero-actions">
+            <a class="hero-button" href="#project-preview" style="--button-delay: 0.68s;">VIEW PREVIEW</a>
+            {% if project.live_url %}
+            <a class="hero-button" href="{{ project.live_url }}" target="_blank" rel="noreferrer" style="--button-delay: 0.84s;">VISIT LIVE SITE</a>
+            {% else %}
+            <a class="hero-button" href="/contact/" style="--button-delay: 0.84s;">CONTACT US</a>
+            {% endif %}
+        </div>
     </div>
 </section>
 
@@ -22,7 +33,7 @@
 </section>
 {% endif %}
 
-<section class="project-gallery reveal-section" aria-label="{{ project.title }} gallery">
+<section class="project-gallery reveal-section" id="project-preview" aria-label="{{ project.title }} gallery">
     <div class="project-preview-heading reveal-item reveal-rise">
         <h2 class="about-section-title project-preview-title">Preview</h2>
     </div>
