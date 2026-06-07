@@ -10,22 +10,74 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
+
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+def _load_env_file(path):
+    if not path.exists():
+        return
+
+    for line in path.read_text().splitlines():
+        line = line.strip()
+
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip("\"'")
+
+        if key and key not in os.environ:
+            os.environ[key] = value
+
+
+def _env(name, default=""):
+    return os.environ.get(name, default)
+
+
+def _env_bool(name, default=False):
+    value = _env(name)
+
+    if value == "":
+        return default
+
+    return value.lower() in {"1", "true", "yes", "on"}
+
+
+def _env_list(name, default=None):
+    value = _env(name)
+
+    if value == "":
+        return default or []
+
+    return [item.strip() for item in value.split(",") if item.strip()]
+
+
+_load_env_file(BASE_DIR / ".env")
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-d!%n%qo&*sn4@i8hgyt(4=b)3(hkeczl79$=8l!+6bksjt9n76'
+SECRET_KEY = _env("DJANGO_SECRET_KEY")
+
+if not SECRET_KEY and _env_bool("DJANGO_DEBUG", True):
+    SECRET_KEY = "django-insecure-local-development-only"
+
+if not SECRET_KEY:
+    raise ImproperlyConfigured("DJANGO_SECRET_KEY must be set in the environment.")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = _env_bool("DJANGO_DEBUG", True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = _env_list("ALLOWED_HOSTS")
 
 
 # Application definition
@@ -116,3 +168,16 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+
+
+# Contact email via Microsoft Graph
+
+MICROSOFT_TENANT_ID = _env("MICROSOFT_TENANT_ID")
+MICROSOFT_CLIENT_ID = _env("MICROSOFT_CLIENT_ID")
+MICROSOFT_CLIENT_SECRET = _env("MICROSOFT_CLIENT_SECRET")
+MICROSOFT_GRAPH_SCOPE = _env("MICROSOFT_GRAPH_SCOPE", "https://graph.microsoft.com/.default")
+MICROSOFT_GRAPH_SENDER = _env("MICROSOFT_GRAPH_SENDER", "info@duoro.ca")
+MICROSOFT_GRAPH_SAVE_TO_SENT_ITEMS = _env_bool("MICROSOFT_GRAPH_SAVE_TO_SENT_ITEMS", True)
+
+CONTACT_EMAIL_RECIPIENTS = _env_list("CONTACT_EMAIL_RECIPIENTS", [MICROSOFT_GRAPH_SENDER])
+CONTACT_EMAIL_SUBJECT_PREFIX = _env("CONTACT_EMAIL_SUBJECT_PREFIX", "[Duoro]")

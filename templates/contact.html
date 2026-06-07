@@ -28,31 +28,64 @@
             <ul class="contact-methods" aria-label="Other ways to reach us">
                 <li>
                     <img src="{% static 'images/email-icon.png' %}" alt="" aria-hidden="true">
-                    <span><a href="mailto:info@duoro.ca">info@duoro.ca</a>.</span>
+                    <span><a href="mailto:info@duoro.ca">info@duoro.ca</a></span>
                 </li>
                 <li>
                     <img src="{% static 'images/insta-icon.png' %}" alt="" aria-hidden="true">
-                    <span><a href="https://www.instagram.com/DuoroDigital/">DuoroDigital</a>.</span>
+                    <span><a href="https://www.instagram.com/DuoroDigital/">DuoroDigital</a></span>
                 </li>
             </ul>
         </div>
-        <form class="contact-form reveal-item reveal-slide-right" id="contact-form" action="#" method="post">
+        <form class="contact-form reveal-item reveal-slide-right" id="contact-form" action="{% url 'contact' %}" method="post">
+            {% csrf_token %}
+            {% if messages %}
+                <div class="contact-messages" aria-live="polite">
+                    {% for message in messages %}
+                        <p class="contact-message contact-message-{{ message.tags }}">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if form.non_field_errors %}
+                <div class="contact-messages" aria-live="polite">
+                    {% for error in form.non_field_errors %}
+                        <p class="contact-message contact-message-error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="contact-honeypot" aria-hidden="true">
+                <label>
+                    <span>Website</span>
+                    <input type="text" name="website" value="" tabindex="-1" autocomplete="off">
+                </label>
+            </div>
             <div class="contact-grid">
                 <label class="contact-field">
                     <span>Name</span>
-                    <input type="text" name="name" placeholder="Your name">
+                    <input type="text" name="name" value="{{ form.name.value|default_if_none:'' }}" placeholder="Your name" autocomplete="name" required>
+                    {% for error in form.name.errors %}
+                        <p class="contact-error">{{ error }}</p>
+                    {% endfor %}
                 </label>
                 <label class="contact-field">
                     <span>Email</span>
-                    <input type="email" name="email" placeholder="you@example.com">
+                    <input type="email" name="email" value="{{ form.email.value|default_if_none:'' }}" placeholder="you@example.com" autocomplete="email" required>
+                    {% for error in form.email.errors %}
+                        <p class="contact-error">{{ error }}</p>
+                    {% endfor %}
                 </label>
                 <label class="contact-field contact-field-wide">
                     <span>Company</span>
-                    <input type="text" name="company" placeholder="Your company or brand">
+                    <input type="text" name="company" value="{{ form.company.value|default_if_none:'' }}" placeholder="Your company or brand" autocomplete="organization">
+                    {% for error in form.company.errors %}
+                        <p class="contact-error">{{ error }}</p>
+                    {% endfor %}
                 </label>
                 <label class="contact-field contact-field-wide">
                     <span>Project Details</span>
-                    <textarea name="details" rows="6" placeholder="Tell us about your project, goals, or timeline."></textarea>
+                    <textarea name="details" rows="6" placeholder="Tell us about your project, goals, or timeline." required>{{ form.details.value|default_if_none:'' }}</textarea>
+                    {% for error in form.details.errors %}
+                        <p class="contact-error">{{ error }}</p>
+                    {% endfor %}
                 </label>
             </div>
             <button class="contact-button" type="submit">SEND INQUIRY</button>

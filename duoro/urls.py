@@ -26,6 +26,6 @@ urlpatterns = [
     path('services/', TemplateView.as_view(template_name='services.html'), name='services'),
     path('portfolio/', views.portfolio, name='portfolio'),
     path('portfolio/<slug:slug>/', views.portfolio_detail, name='portfolio-detail'),
-    path('contact/', TemplateView.as_view(template_name='contact.html'), name='contact'),
+    path('contact/', views.contact, name='contact'),
     path('admin/', admin.site.urls),
 ]

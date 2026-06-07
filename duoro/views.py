@@ -1,5 +1,19 @@
+import logging
+import json
+from urllib.error import HTTPError, URLError
+from urllib.parse import quote, urlencode
+from urllib.request import Request, urlopen
+
+from django.conf import settings
+from django.contrib import messages
+from django.core.exceptions import ImproperlyConfigured
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+
+from .forms import ContactForm
+
+
+logger = logging.getLogger(__name__)
 
 
 PROJECTS = [
@@ -123,3 +137,156 @@ def portfolio_detail(request, slug):
     if not project:
         raise Http404("Project not found")
     return render(request, "portfolio_detail.html", {"project": project})
+
+
+def contact(request):
+    form = ContactForm(request.POST or None)
+
+    if request.method == "POST":
+        if form.is_valid():
+            if send_contact_email(form.cleaned_data):
+                messages.success(request, "Thanks. Your inquiry has been sent.")
+                return redirect("/contact/#contact-form")
+
+            messages.error(
+                request,
+                "Sorry, the message could not be sent right now. Please email info@duoro.ca directly.",
+            )
+        else:
+            messages.error(request, "Please check the form and try again.")
+    else:
+        form = ContactForm()
+
+    return render(request, "contact.html", {"form": form})
+
+
+def send_contact_email(data):
+    recipients = settings.CONTACT_EMAIL_RECIPIENTS
+
+    if not recipients:
+        logger.error("Contact form email attempted without CONTACT_EMAIL_RECIPIENTS.")
+        return False
+
+    try:
+        access_token = get_graph_access_token()
+        send_graph_contact_email(access_token, data, recipients)
+    except (ImproperlyConfigured, GraphEmailError, URLError, OSError) as error:
+        logger.exception("Contact form email failed: %s", error)
+        return False
+
+    return True
+
+
+class GraphEmailError(Exception):
+    pass
+
+
+def get_graph_access_token():
+    required_settings = {
+        "MICROSOFT_TENANT_ID": settings.MICROSOFT_TENANT_ID,
+        "MICROSOFT_CLIENT_ID": settings.MICROSOFT_CLIENT_ID,
+        "MICROSOFT_CLIENT_SECRET": settings.MICROSOFT_CLIENT_SECRET,
+    }
+    missing_settings = [name for name, value in required_settings.items() if not value]
+
+    if missing_settings:
+        raise ImproperlyConfigured(
+            "Missing Microsoft Graph setting(s): " + ", ".join(missing_settings)
+        )
+
+    token_url = (
+        "https://login.microsoftonline.com/"
+        f"{quote(settings.MICROSOFT_TENANT_ID, safe='')}/oauth2/v2.0/token"
+    )
+    payload = urlencode(
+        {
+            "client_id": settings.MICROSOFT_CLIENT_ID,
+            "client_secret": settings.MICROSOFT_CLIENT_SECRET,
+            "scope": settings.MICROSOFT_GRAPH_SCOPE,
+            "grant_type": "client_credentials",
+        }
+    ).encode("utf-8")
+    response_data = post_request(
+        token_url,
+        payload,
+        {"Content-Type": "application/x-www-form-urlencoded"},
+    )
+    token = response_data.get("access_token")
+
+    if not token:
+        raise GraphEmailError("Microsoft token response did not include access_token.")
+
+    return token
+
+
+def send_graph_contact_email(access_token, data, recipients):
+    sender = settings.MICROSOFT_GRAPH_SENDER
+
+    if not sender:
+        raise ImproperlyConfigured("MICROSOFT_GRAPH_SENDER must be set.")
+
+    subject = f"{settings.CONTACT_EMAIL_SUBJECT_PREFIX} New inquiry from {data['name']}"
+    company = data.get("company") or "Not provided"
+    body = (
+        "New Duoro website inquiry\n\n"
+        f"Name: {data['name']}\n"
+        f"Email: {data['email']}\n"
+        f"Company: {company}\n\n"
+        "Project details:\n"
+        f"{data['details']}\n"
+    )
+    payload = {
+        "message": {
+            "subject": subject,
+            "body": {
+                "contentType": "Text",
+                "content": body,
+            },
+            "toRecipients": email_recipients(recipients),
+            "replyTo": email_recipients([data["email"]]),
+        },
+        "saveToSentItems": settings.MICROSOFT_GRAPH_SAVE_TO_SENT_ITEMS,
+    }
+    send_url = f"https://graph.microsoft.com/v1.0/users/{quote(sender, safe='')}/sendMail"
+
+    post_request(
+        send_url,
+        json.dumps(payload).encode("utf-8"),
+        {
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        expect_json=False,
+    )
+
+
+def email_recipients(addresses):
+    return [
+        {
+            "emailAddress": {
+                "address": address,
+            },
+        }
+        for address in addresses
+    ]
+
+
+def post_request(url, data, headers, expect_json=True):
+    request = Request(url, data=data, headers=headers, method="POST")
+
+    try:
+        with urlopen(request, timeout=20) as response:
+            response_body = response.read().decode("utf-8")
+    except HTTPError as error:
+        response_body = error.read().decode("utf-8", errors="replace")
+        raise GraphEmailError(
+            f"Microsoft request failed with HTTP {error.code}: {response_body}"
+        ) from error
+
+    if not expect_json:
+        return {}
+
+    try:
+        return json.loads(response_body)
+    except json.JSONDecodeError as error:
+        raise GraphEmailError("Microsoft Graph response was not valid JSON.") from error
